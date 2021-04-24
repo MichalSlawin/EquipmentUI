@@ -1,10 +1,14 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class Slot : MonoBehaviour, IDropHandler
 {
     protected Item storedItem = null;
     protected GameController gameController = null;
+    private Color originalColor;
+
+    public Color OriginalColor { get => originalColor; set => originalColor = value; }
 
     private void Start()
     {
@@ -14,6 +18,8 @@ public class Slot : MonoBehaviour, IDropHandler
 
         gameController = FindObjectOfType<GameController>();
         if (gameController == null) throw new System.Exception("Game Controller not found");
+
+        OriginalColor = GetComponent<Image>().color;
     }
 
     public void OnDrop(PointerEventData eventData)
@@ -22,7 +28,7 @@ public class Slot : MonoBehaviour, IDropHandler
         if(droppedObj != null)
         {
             Item droppedItem = droppedObj.GetComponent<Item>();
-            if (droppedItem != null) HandleDrop(droppedItem);
+            if (droppedItem != null && droppedItem.OccupiedSlot != this) HandleDrop(droppedItem);
         }
     }
 
