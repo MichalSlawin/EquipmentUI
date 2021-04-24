@@ -10,8 +10,13 @@ public class Item : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndD
     private RectTransform rectTransform;
     private Image image;
     private CanvasGroup canvasGroup;
-
     private Vector2 startDragPosition;
+    private Slot occupiedSlot;
+
+    private bool droppedSuccesfully = false;
+
+    public bool DroppedSuccesfully { get => droppedSuccesfully; set => droppedSuccesfully = value; }
+    public Slot OccupiedSlot { get => occupiedSlot; set => occupiedSlot = value; }
 
     private void Start()
     {
@@ -44,8 +49,12 @@ public class Item : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndD
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        Debug.Log("End drag");
         image.maskable = true;
         canvasGroup.blocksRaycasts = true;
+
+        if (!DroppedSuccesfully) ResetPosition();
+        DroppedSuccesfully = false;
     }
 
     public void OnPointerDown(PointerEventData eventData)
