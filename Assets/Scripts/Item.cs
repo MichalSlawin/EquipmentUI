@@ -38,6 +38,7 @@ public class Item : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHand
         image.maskable = false;
         canvasGroup.blocksRaycasts = false;
         startDragPosition = rectTransform.anchoredPosition;
+        GetComponent<Canvas>().overrideSorting = true;
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -52,6 +53,7 @@ public class Item : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHand
 
         if (!DroppedSuccesfully) ResetPosition();
         DroppedSuccesfully = false;
+        GetComponent<Canvas>().overrideSorting = false;
     }
 
     public void ResetPosition()
