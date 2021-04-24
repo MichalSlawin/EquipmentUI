@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿
 
 public class SwordSlot : Slot
 {
@@ -10,7 +8,7 @@ public class SwordSlot : Slot
         if(sword != null)
         {
             SwapItems(sword);
-            StartCoroutine(gameController.ShowEquippedItem(sword));
+            gameController.StartShowCoroutine(sword);
         }
         else
         {

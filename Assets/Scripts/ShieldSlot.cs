@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿
 
 public class ShieldSlot : Slot
 {
@@ -10,7 +8,7 @@ public class ShieldSlot : Slot
         if (shield != null)
         {
             SwapItems(shield);
-            StartCoroutine(gameController.ShowEquippedItem(shield));
+            gameController.StartShowCoroutine(shield);
         }
         else
         {

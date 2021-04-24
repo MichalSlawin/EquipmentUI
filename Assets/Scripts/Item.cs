@@ -1,10 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class Item : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
+public class Item : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
     private Canvas canvas;
     private RectTransform rectTransform;
@@ -54,11 +52,6 @@ public class Item : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndD
 
         if (!DroppedSuccesfully) ResetPosition();
         DroppedSuccesfully = false;
-    }
-
-    public void OnPointerDown(PointerEventData eventData)
-    {
-
     }
 
     public void ResetPosition()

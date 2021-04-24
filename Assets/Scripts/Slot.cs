@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class Slot : MonoBehaviour, IDropHandler
@@ -42,6 +40,13 @@ public class Slot : MonoBehaviour, IDropHandler
 
     protected void SwapItems(Item item)
     {
+        if(storedItem != null && ((item.OccupiedSlot is SwordSlot && !(storedItem is Sword))
+            || (item.OccupiedSlot is ShieldSlot && !(storedItem is Shield))))
+        {
+            item.ResetPosition();
+            return;
+        }
+
         Item tempItem = storedItem;
         Slot tempSlot = item.OccupiedSlot;
         
@@ -55,6 +60,11 @@ public class Slot : MonoBehaviour, IDropHandler
         if (tempItem != null)
         {
             tempSlot.PlaceItem(tempItem);
+
+            if (tempSlot is SwordSlot || tempSlot is ShieldSlot)
+            {
+                gameController.StartShowCoroutine(tempItem);
+            }
         }
 
         item.DroppedSuccesfully = true;

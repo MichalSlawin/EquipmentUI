@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
@@ -29,7 +28,13 @@ public class GameController : MonoBehaviour
         random = new System.Random();
     }
 
-    public IEnumerator ShowEquippedItem(Item item)
+    public void StartShowCoroutine(Item item)
+    {
+        StopAllCoroutines();
+        StartCoroutine(ShowEquippedItem(item));
+    }
+
+    private IEnumerator ShowEquippedItem(Item item)
     {
         actionText.text = "Equipped " + item.ToString();
         PlayRandomSound();
