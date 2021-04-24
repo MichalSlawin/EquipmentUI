@@ -6,12 +6,16 @@ using UnityEngine.EventSystems;
 public class Slot : MonoBehaviour, IDropHandler
 {
     protected Item storedItem = null;
+    protected GameController gameController = null;
 
     private void Start()
     {
         Item item = GetComponentInChildren<Item>();
         storedItem = item;
         if(item != null) item.OccupiedSlot = this;
+
+        gameController = FindObjectOfType<GameController>();
+        if (gameController == null) throw new System.Exception("Game Controller not found");
     }
 
     public void OnDrop(PointerEventData eventData)

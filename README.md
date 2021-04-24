@@ -1,3 +1,3 @@
 # Equipment UI
 
-UI for player's equipment (shields and swords).
+UI for player's equipment (shields and swords). Drag and drop items between slots.

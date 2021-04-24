@@ -10,6 +10,7 @@ public class ShieldSlot : Slot
         if (shield != null)
         {
             SwapItems(shield);
+            StartCoroutine(gameController.ShowEquippedItem(shield));
         }
         else
         {

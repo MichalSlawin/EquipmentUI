@@ -10,6 +10,7 @@ public class SwordSlot : Slot
         if(sword != null)
         {
             SwapItems(sword);
+            StartCoroutine(gameController.ShowEquippedItem(sword));
         }
         else
         {
