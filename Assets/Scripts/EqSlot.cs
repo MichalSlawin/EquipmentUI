@@ -6,7 +6,6 @@ public class EqSlot : Slot
 {
     public override void HandleDrop(Item item)
     {
-        Debug.Log("Dropped in eq");
-        PlaceItem(item);
+        SwapItems(item);
     }
 }

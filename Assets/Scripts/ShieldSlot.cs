@@ -9,7 +9,7 @@ public class ShieldSlot : Slot
         Shield shield = item.GetComponent<Shield>();
         if (shield != null)
         {
-            PlaceItem(shield);
+            SwapItems(shield);
         }
         else
         {

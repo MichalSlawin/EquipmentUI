@@ -9,7 +9,7 @@ public class SwordSlot : Slot
         Sword sword = item.GetComponent<Sword>();
         if(sword != null)
         {
-            PlaceItem(sword);
+            SwapItems(sword);
         }
         else
         {

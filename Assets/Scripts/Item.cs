@@ -49,7 +49,6 @@ public class Item : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndD
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        Debug.Log("End drag");
         image.maskable = true;
         canvasGroup.blocksRaycasts = true;
 
@@ -59,7 +58,7 @@ public class Item : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndD
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        Debug.Log("Pointer down");
+
     }
 
     public void ResetPosition()

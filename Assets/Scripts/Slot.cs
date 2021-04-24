@@ -16,7 +16,6 @@ public class Slot : MonoBehaviour, IDropHandler
 
     public void OnDrop(PointerEventData eventData)
     {
-        Debug.Log("Dropped in slot");
         GameObject droppedObj = eventData.pointerDrag;
         if(droppedObj != null)
         {
@@ -27,22 +26,33 @@ public class Slot : MonoBehaviour, IDropHandler
 
     public virtual void HandleDrop(Item item) {}
 
-    protected void PlaceItem(Item item)
+    private void PlaceItem(Item item)
     {
-        if (storedItem == null)
-        {
-            storedItem = item;
-            item.OccupiedSlot.storedItem = null;
-            item.OccupiedSlot = this;
+        storedItem = item;
+        item.OccupiedSlot = this;
 
-            RectTransform itemRectTransform = item.GetComponent<RectTransform>();
-            itemRectTransform.SetParent(transform);
-            itemRectTransform.anchoredPosition = Vector2.zero;
-            item.DroppedSuccesfully = true;
-        }
-        else
+        RectTransform itemRectTransform = item.GetComponent<RectTransform>();
+        itemRectTransform.SetParent(transform);
+        itemRectTransform.anchoredPosition = Vector2.zero;
+    }
+
+    protected void SwapItems(Item item)
+    {
+        Item tempItem = storedItem;
+        Slot tempSlot = item.OccupiedSlot;
+        
+        if(tempItem == null)
         {
-            item.ResetPosition();
+            item.OccupiedSlot.storedItem = null;
         }
+
+        PlaceItem(item);
+        
+        if (tempItem != null)
+        {
+            tempSlot.PlaceItem(tempItem);
+        }
+
+        item.DroppedSuccesfully = true;
     }
 }
