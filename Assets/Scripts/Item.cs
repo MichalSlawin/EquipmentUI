@@ -10,6 +10,7 @@ public class Item : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHand
     private CanvasGroup canvasGroup;
     private Vector2 startDragPosition;
     private Slot occupiedSlot;
+    private Canvas itemCanvas;
 
     private bool droppedSuccesfully = false;
 
@@ -31,6 +32,9 @@ public class Item : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHand
 
         canvasGroup = GetComponent<CanvasGroup>();
         if (canvasGroup == null) throw new System.Exception("Canvas Group not found");
+
+        itemCanvas = GetComponent<Canvas>();
+        if (itemCanvas == null) throw new System.Exception("Item Canvas not found");
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -38,7 +42,7 @@ public class Item : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHand
         image.maskable = false;
         canvasGroup.blocksRaycasts = false;
         startDragPosition = rectTransform.anchoredPosition;
-        GetComponent<Canvas>().overrideSorting = true;
+        itemCanvas.overrideSorting = true;
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -53,7 +57,7 @@ public class Item : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHand
 
         if (!DroppedSuccesfully) ResetPosition();
         DroppedSuccesfully = false;
-        GetComponent<Canvas>().overrideSorting = false;
+        itemCanvas.overrideSorting = false;
     }
 
     public void ResetPosition()
