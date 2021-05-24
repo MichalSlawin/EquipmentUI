@@ -1,9 +1,12 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using System;
 
-public class Item : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
+public abstract class Item : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
+    private Type itemType;
+
     private Canvas canvas;
     private RectTransform rectTransform;
     private Image image;
@@ -16,6 +19,7 @@ public class Item : MonoBehaviour, IBeginDragHandler, IEndDragHandler, IDragHand
 
     public bool DroppedSuccesfully { get => droppedSuccesfully; set => droppedSuccesfully = value; }
     public Slot OccupiedSlot { get => occupiedSlot; set => occupiedSlot = value; }
+    public abstract Type ItemType { get; }
 
     private void Start()
     {

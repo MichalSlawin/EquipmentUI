@@ -1,7 +1,9 @@
-﻿
+﻿using System;
 
-public class SwordSlot : Slot
+public class WeaponSlot : Slot
 {
+    public override Type StoredType { get => typeof(Weapon); }
+
     public override void HandleDrop(Item item)
     {
         Sword sword = item.GetComponent<Sword>();

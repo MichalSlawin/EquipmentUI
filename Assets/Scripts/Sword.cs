@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class Sword : Item
+public class Sword : Weapon
 {
     [SerializeField] private float attackDamage = 5f;
 

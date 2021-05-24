@@ -1,14 +1,19 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using System;
 
-public class Slot : MonoBehaviour, IDropHandler
+public abstract class Slot : MonoBehaviour, IDropHandler
 {
+    private Type storedType;
+
     protected Item storedItem = null;
     protected GameController gameController = null;
     private Color originalColor;
 
     public Color OriginalColor { get => originalColor; set => originalColor = value; }
+
+    public abstract Type StoredType { get; }
 
     private void Start()
     {
@@ -46,8 +51,7 @@ public class Slot : MonoBehaviour, IDropHandler
 
     protected void SwapItems(Item item)
     {
-        if(storedItem != null && ((item.OccupiedSlot is SwordSlot && !(storedItem is Sword))
-            || (item.OccupiedSlot is ShieldSlot && !(storedItem is Shield))))
+        if (storedItem != null && storedItem.ItemType != item.OccupiedSlot.StoredType && !(item.OccupiedSlot is EqSlot))
         {
             item.ResetPosition();
             return;
@@ -67,7 +71,7 @@ public class Slot : MonoBehaviour, IDropHandler
         {
             tempSlot.PlaceItem(tempItem);
 
-            if (tempSlot is SwordSlot || tempSlot is ShieldSlot)
+            if (tempSlot is WeaponSlot || tempSlot is ShieldSlot)
             {
                 gameController.StartShowCoroutine(tempItem);
             }
