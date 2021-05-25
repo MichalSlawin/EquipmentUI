@@ -11,6 +11,6 @@ public abstract class Armor : Item
 
     public override string ToString()
     {
-        return " (Defence: " + Defence.ToString() + ")";
+        return ItemType.ToString() + " (Defence: " + Defence.ToString() + ")";
     }
 }
