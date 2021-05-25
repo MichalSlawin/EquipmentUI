@@ -37,7 +37,7 @@ public abstract class Slot : MonoBehaviour, IDropHandler
         }
     }
 
-    public virtual void HandleDrop(Item item) {}
+    public abstract void HandleDrop(Item item);
 
     private void PlaceItem(Item item)
     {

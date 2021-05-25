@@ -1,16 +1,12 @@
 ﻿using UnityEngine;
 using System;
 
-public class Shield : Item
+public class Shield : Armor
 {
-    [SerializeField] private float defence = 5f;
-
-    public float Defence { get => defence; set => defence = value; }
-
     public override Type ItemType { get => typeof(Shield); }
 
     public override string ToString()
     {
-        return "Shield (Defence: " + defence.ToString() + ")";
+        return "Shield" + base.ToString();
     }
 }
