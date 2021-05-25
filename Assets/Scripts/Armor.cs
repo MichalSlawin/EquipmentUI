@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-public class Armor : Item
+public abstract class Armor : Item
 {
     [SerializeField] private float defence = 5f;
 

@@ -37,7 +37,18 @@ public abstract class Slot : MonoBehaviour, IDropHandler
         }
     }
 
-    public abstract void HandleDrop(Item item);
+    public virtual void HandleDrop(Item item)
+    {
+        if (item.ItemType == StoredType)
+        {
+            SwapItems(item);
+            gameController.StartShowCoroutine(item);
+        }
+        else
+        {
+            item.ResetPosition();
+        }
+    }
 
     private void PlaceItem(Item item)
     {

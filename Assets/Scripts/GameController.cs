@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
-    private const float SHOW_TIME = 2f;
+    private const float SHOW_TIME = 3f;
     private const int FRAME_RATE = 60;
 
     private Color32 changedColor = new Color32(255, 223, 0, 255);
