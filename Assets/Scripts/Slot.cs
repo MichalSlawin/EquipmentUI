@@ -7,18 +7,19 @@ public abstract class Slot : MonoBehaviour, IDropHandler
 {
     private Type storedType;
 
-    protected Item storedItem = null;
+    private Item storedItem = null;
     protected GameController gameController = null;
     private Color originalColor;
 
     public Color OriginalColor { get => originalColor; set => originalColor = value; }
 
     public abstract Type StoredType { get; }
+    protected Item StoredItem { get => storedItem; set => storedItem = value; }
 
     private void Start()
     {
         Item item = GetComponentInChildren<Item>();
-        storedItem = item;
+        StoredItem = item;
         if(item != null) item.OccupiedSlot = this;
 
         gameController = FindObjectOfType<GameController>();
@@ -52,7 +53,7 @@ public abstract class Slot : MonoBehaviour, IDropHandler
 
     private void PlaceItem(Item item)
     {
-        storedItem = item;
+        StoredItem = item;
         item.OccupiedSlot = this;
 
         RectTransform itemRectTransform = item.GetComponent<RectTransform>();
@@ -62,18 +63,18 @@ public abstract class Slot : MonoBehaviour, IDropHandler
 
     protected void SwapItems(Item item)
     {
-        if (storedItem != null && storedItem.ItemType != item.OccupiedSlot.StoredType && !(item.OccupiedSlot is EqSlot))
+        if (StoredItem != null && StoredItem.ItemType != item.OccupiedSlot.StoredType && !(item.OccupiedSlot is EqSlot))
         {
             item.ResetPosition();
             return;
         }
 
-        Item tempItem = storedItem;
+        Item tempItem = StoredItem;
         Slot tempSlot = item.OccupiedSlot;
         
         if(tempItem == null)
         {
-            item.OccupiedSlot.storedItem = null;
+            item.OccupiedSlot.StoredItem = null;
         }
 
         PlaceItem(item);
