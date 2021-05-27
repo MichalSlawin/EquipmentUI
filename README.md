@@ -1,6 +1,6 @@
 # Equipment UI
 
-UI for player's equipment (shields and swords). Drag and drop items between slots.
+UI for player's equipment. Drag and drop items between slots.
 
 Used free Unity assets:
 - RPG inventory icons by REXARD
