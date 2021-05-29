@@ -1,20 +1,33 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class Player : MonoBehaviour
 {
-    [SerializeField] private Equipment equipment;
+    [SerializeField] private Equipment equipment = null;
+    [SerializeField] private GameController gameController = null;
 
-    // Start is called before the first frame update
-    void Start()
+    private float defence = 0;
+    private float attack = 0;
+
+    public float Defence { get => defence; set => defence = value; }
+    public float Attack { get => attack; set => attack = value; }
+
+    private void Start()
     {
-        
+        equipment.SlotChanged += HandleSlotChange;
     }
 
-    // Update is called once per frame
-    void Update()
+    public void HandleSlotChange(object sender, EventArgs eventArgs)
     {
-        
+        UpdateStats();
+    }
+
+    private void UpdateStats()
+    {
+        attack = equipment.GetAttackSum();
+        defence = equipment.GetDefenceSum();
+        gameController.UpdateStatsText(attack, defence);
     }
 }

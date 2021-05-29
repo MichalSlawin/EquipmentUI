@@ -14,6 +14,8 @@ public class GameController : MonoBehaviour
 
     private AudioSource audioSource;
     private TextMeshProUGUI actionText = null;
+    [SerializeField] private TextMeshProUGUI atkText = null;
+    [SerializeField] private TextMeshProUGUI defText = null;
     private System.Random random;
 
     private Item previousItem = null;
@@ -64,5 +66,11 @@ public class GameController : MonoBehaviour
         int randomIndex = random.Next(sounds.Length);
         audioSource.clip = sounds[randomIndex];
         audioSource.Play();
+    }
+
+    public void UpdateStatsText(float atk, float def)
+    {
+        atkText.text = "Atk: " + Mathf.Floor(atk).ToString();
+        defText.text = "Def: " + Mathf.Floor(def).ToString();
     }
 }

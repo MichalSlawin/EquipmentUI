@@ -5,6 +5,8 @@ using System;
 
 public abstract class Slot : MonoBehaviour, IDropHandler
 {
+    public event EventHandler SlotChanged;
+
     private Type storedType;
 
     private Item storedItem = null;
@@ -14,7 +16,7 @@ public abstract class Slot : MonoBehaviour, IDropHandler
     public Color OriginalColor { get => originalColor; set => originalColor = value; }
 
     public abstract Type StoredType { get; }
-    protected Item StoredItem { get => storedItem; set => storedItem = value; }
+    public Item StoredItem { get => storedItem; set => storedItem = value; }
 
     private void Start()
     {
@@ -26,6 +28,11 @@ public abstract class Slot : MonoBehaviour, IDropHandler
         if (gameController == null) throw new System.Exception("Game Controller not found");
 
         OriginalColor = GetComponent<Image>().color;
+    }
+
+    protected virtual void OnSlotChanged(EventArgs eventArgs)
+    {
+        if(SlotChanged != null) SlotChanged.Invoke(this, eventArgs);
     }
 
     public void OnDrop(PointerEventData eventData)
@@ -83,12 +90,14 @@ public abstract class Slot : MonoBehaviour, IDropHandler
         {
             tempSlot.PlaceItem(tempItem);
 
-            if (tempSlot is WeaponSlot || tempSlot is ShieldSlot)
+            if (!(tempSlot is EqSlot))
             {
                 gameController.StartShowCoroutine(tempItem);
             }
         }
 
         item.DroppedSuccesfully = true;
+        OnSlotChanged(EventArgs.Empty);
+        tempSlot.OnSlotChanged(EventArgs.Empty);
     }
 }
